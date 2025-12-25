@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@theme {
+
+  /* Mapping Tailwind names to our CSS variables */
+  --color-background: var(--background);
+  --color-nuetral: var(--nuetral);
+  --color-nuetral2: var(--nuetral2);
+  --color-bg-blue: var(--bg-blue);
+  --color-text-gray: var(--text-gray);
+  --background-image-color-bg: var(--bg-gradient);
+}
+
+/* 1. Light Mode Values (Default) */
+:root {
+  --background:white;
+  --nuetral: #9A9BB1;
+  --nuetral2: #F0F0F3;
+  --bg-blue: #1565C0;
+  --text-gray: #2C2D3A;
+  --bg-gradient: linear-gradient(to right, #40C4FF, #03A9F4);
+}
+
+/* 2. Dark Mode Values */
+/* This activates when the 'dark' class is added to the <html> tag */
+.dark {
+  --background:black;
+  --nuetral: #4A4B5A;      /* Darker nuetral */
+  --nuetral2: #1E1E26;     /* Dark surface color */
+  --bg-blue: #0D47A1;      /* Deeper blue */
+  --text-gray: #565662;    /* Light text for dark background */
+  --bg-gradient: linear-gradient(to right, #01579B, #0288D1); 
+}
+
+/* 3. Enabling the manual toggle variant */
+@custom-variant dark (&:where(.dark, .dark *));
