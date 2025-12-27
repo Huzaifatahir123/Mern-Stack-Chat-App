@@ -56,7 +56,11 @@ export const useStore = create(
           const { messages } = get();
           set({ messages: [...messages, newMessage] });
         },
-
+       resetSelectedUser: () =>
+  set({
+    selectedUser: null,
+    messages: [],
+  }),
         logout: async () => {
           const { socket } = get();
           if (socket) socket.close();

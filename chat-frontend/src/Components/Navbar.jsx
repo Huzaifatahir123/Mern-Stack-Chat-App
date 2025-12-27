@@ -5,7 +5,9 @@ import { useStore } from '../../libs/Zustand';
 import { ChevronLeft } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 
+
 const Navbar = () => {
+    
   const [isOpen, setisOpen] = useState(false);
   const logout = useStore((state)=>state.logout);
   const setIsMessageTabOpen = useStore((state)=> state.setIsMessageTabOpen);
@@ -21,9 +23,9 @@ const Navbar = () => {
             {/* 4. OPEN BUTTON: Toggles the menu */}
             <div 
                 
-                className='flex fixed top-0  w-screen justify-between items-center py-4 px-10  bg-blue-400 text-white shadow-md cursor-pointer'
+                className='flex fixed top-0  w-screen justify-between items-center py-3 px-10  bg-blue-400 text-white shadow-md cursor-pointer'
             >
-               <ChevronLeft onClick={()=>setIsMessageTabOpen(false)} size={28} />
+              
                 <span className="text-lg font-semibold">Chatty</span>
                 <Menu onClick={toggleMenu}  size={24} />
             </div>

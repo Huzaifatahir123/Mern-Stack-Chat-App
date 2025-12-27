@@ -27,7 +27,7 @@ const MessageInput = () => {
   };
 
   return (
-    <div className="p-4 w-full bg-white  ">
+    <div className="flex justify-center items-center w-full h-[13vh] bg-white ">
       
       {/* The form ensures that pressing ENTER submits the message */}
       <form onSubmit={handleSend} className="flex items-center justify-center  gap-3">
@@ -35,7 +35,7 @@ const MessageInput = () => {
         {/* Input Field */}
         <input
           type="text"
-          className={`w-full bg-[#40C4FF] text-black  rounded-lg p-3 text-sm focus:outline-none focus:border-gray-500 transition-all placeholder-white`}
+          className={`w-[60vw] bg-[#40C4FF] text-black  rounded-lg p-3 text-sm focus:outline-none focus:border-gray-500 transition-all placeholder-white`}
           placeholder="Type a message..."
           value={text}
           onChange={(e) => setText(e.target.value)} // Update local state on change

@@ -27,7 +27,7 @@ function App() {
   // 4. STOP RENDERING AND SHOW SPINNER WHILE THE AUTH CHECK IS RUNNING
   if (isAuthLoading) {
     return (
-        <div className="flex items-center justify-center h-screen bg-black">
+        <div className="flex items-center justify-center h-screen ">
             <div className="flex items-center space-x-2">
                 {/* Simple loading spinner */}
                 <div className="w-4 h-4 rounded-full bg-white animate-bounce [animation-delay:-0.3s]"></div>
@@ -72,11 +72,12 @@ function App() {
       <Routes>
         {/* Auth protection logic remains the same */}
         <Route path="/login" element={currentUser ? <Navigate to="/chat"/> : <Login/>} />
+        <Route path="/chat/:id" element={currentUser ? <Chat/> : <Navigate to="/login"/>} />
         <Route path="/signup" element={currentUser ? <Navigate to="/chat"/> : <SignUp/>} />
         <Route path="/chat" element={currentUser ? <Chat/> : <Navigate to="/login"/>} />
-        <Route path="/" element={<Navigate to={currentUser ? "/chat" : "/login"} />} />
         <Route path="/profile" element={currentUser ? <Profile/> :<Navigate to= "/login"/>}  />
         <Route path="/theme" element={currentUser ? <BubbleThemeSelector/> :<Navigate to= "/login"/>}  />
+        <Route path="/" element={<Navigate to={currentUser ? "/chat" : "/login"} />} />
       </Routes>
     </>
   );

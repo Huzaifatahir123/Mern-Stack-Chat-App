@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useStore } from "../../libs/Zustand";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const selectedUser = useStore((state) => state.selectedUser);
   const fetchUsers = useStore((state) => state.fetchUsers);
   const allUsers = useStore((state) => state.registeredUsers);
   const loading = useStore((state) => state.loading);
@@ -28,8 +31,8 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`h-screen pt-4 w-screen bg-background border-r  ${
-        isMessageTabOpen ? "hidden" : "flex flex-col"
+      className={`h-screen pt-4 w-[25vw] max-sm:w-screen bg-background border-r  ${
+        selectedUser ? "hidden md:flex flex-col" : "flex flex-col"
       }  text-white`}
     >
       {/* 1. Sidebar Header & Search */}
@@ -67,8 +70,10 @@ const Sidebar = () => {
               <div
                 key={u._id || u.id} // Handle both _id (MongoDB) and id
                 onClick={() => {
-                  setIsMessageTabOpen(true);
+                  
                   setSelectedUser(u);
+                  setIsMessageTabOpen(false)
+                  navigate(`/chat/${u._id}`);
                 }}
                 className="flex   items-center gap-4 p-4 hover:bg-gray-900 cursor-pointer transition-colors duration-200 group "
               >

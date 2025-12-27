@@ -6,7 +6,7 @@ import ChatMessages from './ChatMessages'; // 👈 Message Display
 
 
 const ChatContainer = () => {
-  const { selectedUser, fetchMessages,currentUser, isMessageTabOpen ,onlineUsers } = useStore();
+  const { selectedUser, fetchMessages,currentUser  ,onlineUsers } = useStore();
 
   // --- CRUCIAL LOGIC: API Trigger ---
   useEffect(() => {
@@ -26,10 +26,10 @@ const ChatContainer = () => {
   
   return (
     // Vertical stack: Header, Messages, Input
-    <div className={`${isMessageTabOpen ? "flex" : "hidden"} flex-col pt-13  h-full w-full bg-black`}>
+    <div className={`${selectedUser ? "flex" : "md:flex hidden"}  flex-col pt-13  h-full w-full `}>
       
       {/* 1. HEADER (Top Bar) */}
-      <div className="p-4 bg-white text-gray-500 flex justify-between  items-center gap-3">
+      <div className="p-4 bg-white h-[12vh] text-gray-500 flex justify-between  items-center gap-3">
         <div className='flex  justify-center items-center gap-4'>
           <img 
                 src={selectedUser.profilePic || `https://ui-avatars.com/api/?name=${selectedUser.name}&background=random&color=fff`} 

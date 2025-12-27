@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useStore } from "../../libs/Zustand";
 import { decryptMessage } from "../../libs/crypto";
+import loader from "./Loader.jsx";
 const ChatMessages = () => {
   // ... (State and useEffect hooks are correct and remain unchanged)
   const { messages, isMessagesLoading, currentUser , bubbleTheme } = useStore();
@@ -17,8 +18,8 @@ const ChatMessages = () => {
 
   if (isMessagesLoading) {
     return (
-      <div className="flex-1 flex items-center justify-center text-gray-500 bg-black">
-        Loading chat history...
+      <div className="flex-1 flex items-center justify-center text-gray-500 ">
+        <loader />
       </div>
     );
   }
