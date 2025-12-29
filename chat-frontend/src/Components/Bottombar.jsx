@@ -12,7 +12,7 @@ const Bottombar = () => {
        Chats
        </NavLink>
       
-       <NavLink className={`${CommonProperties}`} to="/profile">
+       <NavLink className={({isActive})=> isActive ? `${CommonProperties} bg-color-bg text-white ` : `${CommonProperties}`} to="/profile">
        <User2Icon size={36}/>
        Profile
        </NavLink>

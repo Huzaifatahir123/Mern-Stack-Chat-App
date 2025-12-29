@@ -1,22 +1,27 @@
 import React from 'react'
 import { useStore } from '../../libs/Zustand'
+import {Copy} from 'lucide-react'
+import Bottombar from '../Components/Bottombar';
 
 const Profile = () => {
     const currentUser = useStore((state)=>state.currentUser);
     console.log(currentUser);
     
   return (
-    <div className='flex justify-center w-screen h-screen overflow-hidden items-center'>
-           <div className='p-10 flex flex-col justify-center items-center flex-wrap gap-3 rounded-2xl bg-black text-white text-2xl'>
-                       <img 
-                src={currentUser.profilePic || `https://ui-avatars.com/api/?name=${currentUser.name}&background=random&color=fff`} 
-                alt={currentUser.name}
-                className="w-12 h-12 rounded-full object-cover border border-gray-700 group-hover:border-gray-500 transition-colors"
-              />
-                 <p>{currentUser.name}</p>
-                 <p>{currentUser.email}</p>
-                 <p>{currentUser.createdAt.slice(0,10)}</p>
-           </div>
+    <div className='flex flex-col pt-20 w-screen h-screen  items-center'>
+        <img className='w-32 h-32 rounded-full mb-6' src={currentUser?.ProfilePic || "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"} alt="Profile Avatar" />
+      
+          <h1 className='font-bold text-2xl'>{currentUser?.name}</h1>
+ 
+        
+        <div className='flex items-center gap-3 justify-center'>
+          <p className='text-gray-600 font-bold mt-4 text-xl'>435215</p>
+        < Copy className='mt-4 '/>
+
+        </div>
+        <Bottombar/>
+
+
     </div>
   )
 }

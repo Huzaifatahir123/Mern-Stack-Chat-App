@@ -2,7 +2,10 @@ import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
+import { validatePassword } from "../utils/Validate.js";
 import nodemailer from "nodemailer";
+const MAX_ATTEMPTS = 5;
+const LOCK_TIME = 15 * 60 * 1000;
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
@@ -22,12 +25,34 @@ export const login = async(req,res)=>{
     if (!user) {
       return res.status(400).json({ message: "Invalid email or password" });
     }
+      if (user.lockUntil && user.lockUntil > Date.now()) {
+    return res.status(403).json({
+      message: `Account locked. Try again after ${Math.ceil(
+        (user.lockUntil - Date.now()) / 60000
+      )} minutes`
+    });
+  }
 
     // Compare password
     const isMatch = await bcrypt.compare(password, user.passwordHash);
     if (!isMatch) {
-      return res.status(400).json({ message: "Invalid email or password" });
+    // Increment login attempts
+    user.loginAttempts += 1;
+
+    // Lock account if max attempts reached
+    if (user.loginAttempts >= MAX_ATTEMPTS) {
+      user.lockUntil = Date.now() + LOCK_TIME;
+      user.loginAttempts = 0; // reset attempts after locking
     }
+
+    await user.save();
+    return res.status(400).json({
+      message: `Invalid password. Attempts left: ${MAX_ATTEMPTS - user.loginAttempts}`
+    });
+  }
+    user.loginAttempts = 0;
+  user.lockUntil = undefined;
+  await user.save();
 
     // Create JWT token
     const token = jwt.sign(
@@ -65,6 +90,10 @@ export const signUp = async (req,res)=>{
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "Email already in use" });
+    }
+    const errors = validatePassword(password);
+    if (errors.length > 0) {
+      return res.status(400).json({ message: errors });
     }
 
     // Hash password

@@ -25,7 +25,7 @@ const ChatMessages = () => {
   }
 
   return (
-    <div className="flex flex-col h-[65vh] overflow-y-auto p-4 space-y-4  bg-nuetral2">
+    <div className="flex flex-col h-[75vh] overflow-y-auto p-4 space-y-4  bg-nuetral2">
       
       {/* Empty State */}
       {!isMessagesLoading && messages.length === 0 && (
@@ -62,7 +62,7 @@ const ChatMessages = () => {
                 className={`px-4 py-2 rounded-xl text-sm shadow-md
                   ${fromMe 
                     // MY MESSAGE: White background, cuts bottom-right corner
-                    ? `${myBg}  text-white rounded-br-none` 
+                    ? ` bg-color-bg border-white/30 shadow-2xl shadow-nuetral backdrop-blur-md  text-white rounded-br-none` 
                     // THEIR MESSAGE: Dark background, cuts bottom-left corner
                     : ` bg-white text-text-gray rounded-bl-none font-bol`
                   }`}

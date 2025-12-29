@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // We need the Send icon for the button
-import { Send } from "lucide-react"; 
+import { Send , Image } from "lucide-react"; 
 import { useStore } from "../../libs/Zustand";
 
 const MessageInput = () => {
@@ -27,15 +27,15 @@ const MessageInput = () => {
   };
 
   return (
-    <div className="flex justify-center items-center w-full h-[13vh] bg-white ">
-      
+    <div className="flex justify-evenly items-center w-full h-[13vh] bg-white ">
+      < Image color="gray" size={34} /> 
       {/* The form ensures that pressing ENTER submits the message */}
       <form onSubmit={handleSend} className="flex items-center justify-center  gap-3">
         
         {/* Input Field */}
         <input
           type="text"
-          className={`w-[60vw] bg-[#40C4FF] text-black  rounded-lg p-3 text-sm focus:outline-none focus:border-gray-500 transition-all placeholder-white`}
+          className={`w-[60vw] bg-nuetral2 text-black  rounded-lg p-3 text-sm focus:outline-none focus:border-gray-500 transition-all placeholder-black`}
           placeholder="Type a message..."
           value={text}
           onChange={(e) => setText(e.target.value)} // Update local state on change
@@ -47,13 +47,13 @@ const MessageInput = () => {
           type="submit"
           // Disable if there is no text or if a message is already in transit
           disabled={!text.trim() || isSending} 
-          className={`p-3 bg-gradient-to-r from-[#40C4FF] to-[#03A9F4] text-black rounded-full hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
+          className={`p-3 bg-color-bg text-black rounded-full hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
         >
           {/* Show a spinner while sending, otherwise show the icon */}
           {isSending ? (
             <div className="w-5 h-5 border-2 border-t-2 border-black rounded-full animate-spin"></div>
           ) : (
-            <Send className="" size={20} />
+            <Send className="" color="white" size={20} />
           )}
         </button>
       </form>

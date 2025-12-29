@@ -27,7 +27,7 @@ const Chat = () => {
   return (
     // Sets up the black background and the horizontal split
     <div className="flex flex-col  h-full overflow-x-hidden  text-white ">
-      <Navbar/>
+    
       {/* 1. LEFT: Sidebar (Fixed Width) */}
 
     <div className='flex'>
